@@ -72,7 +72,7 @@ class _TransactionFormState extends State<TransactionForm> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    'Data Selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}',
+                    'Data Selecionada:  ${DateFormat('dd/MM/y').format(_selectedDate)}',
                   ),
                   TextButton(
                     child: Text(
