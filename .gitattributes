@@ -1,2 +1,2 @@
-windows/runner/*linguist-vendored
-windows/flutter/*linguist-vendored
+windows/runner/* linguist-vendored
+windows/flutter/* linguist-vendored
