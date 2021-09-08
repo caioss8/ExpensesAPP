@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'adaptative_button.dart';
+import 'adaptative_textfield.dart';
+import 'adaptative_date_picker.dart';
 
 class TransactionForm extends StatefulWidget {
   final void Function(String, double, DateTime) onSubmit;
@@ -26,22 +28,6 @@ class _TransactionFormState extends State<TransactionForm> {
     widget.onSubmit(title, value, _selectedDate);
   }
 
-  _showDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2019),
-      lastDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate == null) {
-        return;
-      }
-      setState(() {
-        _selectedDate = pickedDate;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -56,54 +42,34 @@ class _TransactionFormState extends State<TransactionForm> {
           ),
           child: Column(
             children: <Widget>[
-              TextField(
+              AdaptativeTextField(
                 controller: _titleController,
                 onSubmitted: (_) => _submitForm,
-                decoration: InputDecoration(
-                  labelText: 'Título',
-                ),
+                label: 'Título',
               ),
-              TextField(
+              AdaptativeTextField(
                 controller: _valueController,
                 keyboardType: TextInputType.numberWithOptions(
                   decimal: true,
                 ),
                 onSubmitted: (_) => _submitForm,
-                decoration: InputDecoration(
-                  labelText: 'Valor (R\$)',
-                ),
+                label: 'Valor (R\$)',
               ),
-              Container(
-                height: 70,
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      'Data Selecionada:  ${DateFormat('dd/MM/y').format(_selectedDate)}',
-                    ),
-                    TextButton(
-                      child: Text(
-                        'Selecionar Data',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onPressed: _showDatePicker,
-                    )
-                  ],
-                ),
+              AdapatativeDatePicker(
+                selectedDate: _selectedDate,
+                onDateChanged: (newDate) {
+                  setState(() {
+                    _selectedDate = newDate;
+                  });
+                },
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  ElevatedButton(
-                    child: Text(
-                      'Nova Transação',
-                      style: TextStyle(
-                        color: Theme.of(context).textTheme.button?.color,
-                      ),
-                    ),
+                  AdaptativeButton(
+                    label: 'Nova Transação',
                     onPressed: _submitForm,
-                  )
+                  ),
                 ],
               ),
             ],
