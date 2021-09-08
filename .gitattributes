@@ -1,3 +1,3 @@
 static/* linguist-vendored
-windows/* linguist-vendored
-site_cartao/templates/* linguist-vendored
+windows/runner/* linguist-vendored
+windows/flutter/* linguist-vendored
